@@ -14,10 +14,18 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class TestDataServiceImpl implements TestDataService {
 
+    // A single-threaded executor that can schedule commands
+    // to run after a given delay, or to execute periodically
     private final ScheduledExecutorService executorService
             = Executors.newSingleThreadScheduledExecutor();
     private final KafkaDataService kafkaDataService;
 
+    /**
+     * This method creates random messages to send
+     *
+     * @param testOptions - instance of a class that stores information
+     *                    about automatic sending of messages
+     */
     @Override
     public void sendMessages(DataTestOptions testOptions) {
         if (testOptions.getMeasurementTypes().length > 0) {

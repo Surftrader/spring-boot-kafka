@@ -16,27 +16,35 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class describes the Kafka configuration
+ */
 @Configuration
 @RequiredArgsConstructor
 public class KafkaConfig {
 
+    // Kafka servers to which we send information
     @Value("${spring.kafka.bootstrap-servers}")
     private String servers;
 
     private final XML settings;
 
+    // this topic stores information from the temperature sensor
     @Bean
     public NewTopic temperatureTopic() {
         return TopicBuilder.name("data-temperature")
+                // for correct operation, Kafka specifies an odd number of partitions
                 .partitions(5)
                 .replicas(1)
                 .config(
                         TopicConfig.RETENTION_MS_CONFIG,
+                        // set a message storage limit in Kafka of 7 days
                         String.valueOf(Duration.ofDays(7).toMillis())
                 )
                 .build();
     }
 
+    // this topic stores information from the voltage sensor
     @Bean
     public NewTopic voltageTopic() {
         return TopicBuilder.name("data-voltage")
@@ -49,6 +57,7 @@ public class KafkaConfig {
                 .build();
     }
 
+    // this topic stores information from the power sensor
     @Bean
     public NewTopic powerTopic() {
         return TopicBuilder.name("data-power")
@@ -61,6 +70,7 @@ public class KafkaConfig {
                 .build();
     }
 
+    // Creates a sender options instance with properties
     @Bean
     public SenderOptions<String, Object> senderOptions() {
         Map<String, Object> props = new HashMap<>(3);
@@ -81,6 +91,7 @@ public class KafkaConfig {
         return SenderOptions.create(props);
     }
 
+    // Creates a Kafka sender
     @Bean
     public KafkaSender<String, Object> sender() {
         return KafkaSender.create(senderOptions());

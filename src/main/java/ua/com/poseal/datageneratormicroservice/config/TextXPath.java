@@ -3,6 +3,9 @@ package ua.com.poseal.datageneratormicroservice.config;
 import com.jcabi.xml.XML;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * This class allows to process XML files
+ */
 @RequiredArgsConstructor
 public final class TextXPath {
 

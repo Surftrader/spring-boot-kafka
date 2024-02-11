@@ -49,18 +49,21 @@
             <version>${mapstruct.version}</version>
         </dependency>
 
+        <!--    Spring Kafka support    -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
             <version>${spring-kafka.version}</version>
         </dependency>
 
+        <!--    Reactive API for Apache Kafka    -->
         <dependency>
             <groupId>io.projectreactor.kafka</groupId>
             <artifactId>reactor-kafka</artifactId>
             <version>${reactor-kafka.version}</version>
         </dependency>
 
+        <!--    XML parser    -->
         <dependency>
             <groupId>com.jcabi</groupId>
             <artifactId>jcabi-xml</artifactId>

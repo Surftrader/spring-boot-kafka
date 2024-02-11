@@ -21,14 +21,15 @@ public class KafkaDataServiceImpl implements KafkaDataService {
             case POWER -> "data-power";
         };
         kafkaSender.send(
+                // The Mono class encapsulates data to be sent in a reactive way
                 Mono.just(
                         SenderRecord.create(
                                 topic,
                                 0,
                                 System.currentTimeMillis(),
-                                String.valueOf(data.hashCode()),
-                                data,
-                                null
+                                String.valueOf(data.hashCode()), // key
+                                data, // value
+                                null // correlation metadata
                         )
                 )
         ).subscribe();

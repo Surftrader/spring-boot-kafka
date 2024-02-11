@@ -11,6 +11,12 @@ import java.io.File;
 @Configuration
 public class BeanConfig {
 
+    /**
+     * This method describes the Kafka producer configuration
+     * from the file producer.xml
+     *
+     * @return XMLDocument
+     */
     @SneakyThrows
     @Bean
     public XML producerXML() {
